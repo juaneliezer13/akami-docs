@@ -30,7 +30,9 @@ akami-docs/
 │   └── nginx.conf.example                        # Configuración base de Nginx con compresión Gzip y caché
 │
 ├── 🏷️ releases/                                  # Historial completo de versiones y notas de lanzamiento
+│   ├── README.md                                 # Matriz centralizada de versiones (Frontend + Backend API)
 │   ├── RELEASE_NOTES_v1.1.0.md                   # Reconciliación inicial de catálogo y arquitectura modular
+│   ├── RELEASE_NOTES_API_v1.1.0.md               # Orquestación autónoma de akami-api en puerto 15001
 │   ├── RELEASE_NOTES_v1.2.0.md                   # Optimización de banners y experiencia móvil
 │   ├── RELEASE_NOTES_v1.2.2.md                   # Sincronización de inventario y precios oficiales
 │   ├── RELEASE_NOTES_v1.2.3.md                   # Ajustes de catálogo y normalización de activos
