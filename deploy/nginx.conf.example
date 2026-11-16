@@ -1,0 +1,37 @@
+# Configuración optimizada de Nginx para Akami K-Beauty SPA
+# /etc/nginx/conf.d/default.conf
+
+server {
+    listen       80;
+    server_name  localhost;
+
+    # Compresión gzip para máxima velocidad en celulares
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_proxied any;
+    gzip_types text/plain text/css text/xml application/javascript application/json image/svg+xml;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+        try_files $uri $uri/ /akami/index.html;
+    }
+
+    # Ruta específica de la vitrina Akami
+    location /akami/ {
+        alias /usr/share/nginx/html/akami/;
+        try_files $uri $uri/ /akami/index.html;
+        
+        # Cache prolongado para activos inmutables empaquetados por Vite
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff2?)$ {
+            expires 1y;
+            add_header Cache-Control "public, no-transform, immutable";
+        }
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
