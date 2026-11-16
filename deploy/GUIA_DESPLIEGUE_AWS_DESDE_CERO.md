@@ -1,8 +1,8 @@
 # 🚀 Guía de Despliegue y Migración en AWS EC2 — Akami K-Beauty
 
 Esta guía contiene las instrucciones detalladas para desplegar y migrar **Akami K-Beauty** en un servidor **AWS EC2** con la nueva arquitectura desacoplada:
-* **Frontend (Web SPA / Nginx):** Puerto **`16001`**
-* **Backend (API RESTful PHP 8.2 + SQLite):** Puerto **`15001`**
+* **Frontend (Web SPA / Nginx):** Puerto **`17001`**
+* **Backend (API RESTful PHP 8.2 + SQLite):** Puerto **`16001`**
 
 ---
 
@@ -16,8 +16,8 @@ Antes de levantar los contenedores con los nuevos puertos en AWS, debes autoriza
 
 | Tipo | Protocolo | Rango de Puertos | Origen (Source) | Descripción |
 |---|---|---|---|---|
-| **Custom TCP** | TCP | `16001` | `0.0.0.0/0` (o tu IP / CDN) | Akami Frontend Web SPA |
-| **Custom TCP** | TCP | `15001` | `0.0.0.0/0` (o red interna) | Akami Backend RESTful API |
+| **Custom TCP** | TCP | `17001` | `0.0.0.0/0` (o tu IP / CDN) | Akami Frontend Web SPA |
+| **Custom TCP** | TCP | `16001` | `0.0.0.0/0` (o red interna) | Akami Backend RESTful API |
 
 *(Si ya no vas a usar el puerto `23000` de forma directa, puedes eliminar su regla después de verificar la migración).*
 
@@ -25,7 +25,7 @@ Antes de levantar los contenedores con los nuevos puertos en AWS, debes autoriza
 
 ## 🔄 2. Procedimiento de Migración en Servidor Activo (Cero Pérdida de Datos)
 
-Sigue estos pasos en el servidor para migrar desde la versión anterior (puerto 23000) a los nuevos puertos (`16001` y `15001`) manteniendo intacta la base de datos (`akami.sqlite`) y las imágenes (`uploads/`):
+Sigue estos pasos en el servidor para migrar desde la versión anterior (puerto 23000) a los nuevos puertos (`17001` y `16001`) manteniendo intacta la base de datos (`akami.sqlite`) y las imágenes (`uploads/`):
 
 ### Paso 2.1: Conectarte por SSH a la instancia EC2
 ```bash
@@ -50,7 +50,7 @@ Actualiza el `docker-compose.yml` del servidor con la nueva configuración de pu
 
 ```yaml
 # 🐳 Docker Compose — Akami K-Beauty (Servidor AWS / Producción)
-# Frontend: 16001 | Backend: 15001
+# Frontend: 17001 | Backend: 16001
 
 services:
   api_akami:
@@ -58,7 +58,7 @@ services:
     container_name: api_akami
     restart: unless-stopped
     ports:
-      - "${BACK_PORT:-15001}:8000"
+      - "${BACK_PORT:-16001}:8000"
     volumes:
       - ./database:/var/www/database
       - ./uploads:/var/www/uploads
@@ -74,7 +74,7 @@ services:
     container_name: cliente_akami
     restart: unless-stopped
     ports:
-      - "${FRONT_PORT:-16001}:80"
+      - "${FRONT_PORT:-17001}:80"
     volumes:
       - ./uploads:/usr/share/nginx/uploads:ro
     environment:
@@ -104,14 +104,14 @@ docker compose up -d
 # 1. Comprobar que ambos contenedores estén 'Up' en sus nuevos puertos
 docker compose ps
 
-# 2. Verificar respuesta directa del Backend (puerto 15001)
-curl -s http://localhost:15001/api/health
-
-# 3. Verificar proxy inverso de Nginx a través del Frontend (puerto 16001)
+# 2. Verificar respuesta directa del Backend (puerto 16001)
 curl -s http://localhost:16001/api/health
 
+# 3. Verificar proxy inverso de Nginx a través del Frontend (puerto 17001)
+curl -s http://localhost:17001/api/health
+
 # 4. Verificar que los 83 productos se mantienen intactos en la base de datos
-curl -s http://localhost:16001/api/products | grep -o '"id":' | wc -l
+curl -s http://localhost:17001/api/products | grep -o '"id":' | wc -l
 ```
 *Respuesta esperada:* Conteo de productos: **`83`**.
 
@@ -127,8 +127,8 @@ server {
     server_name akami.batdev.lat;
 
     location / {
-        # Cambiar el puerto anterior 23000 por el nuevo 16001
-        proxy_pass http://127.0.0.1:16001;
+        # Cambiar el puerto anterior 23000 por el nuevo 17001
+        proxy_pass http://127.0.0.1:17001;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -157,8 +157,8 @@ Si en el servidor decides clonar los repositorios por separado para operarlos de
 cd ~/akami/akami-api
 docker compose up -d
 ```
-* **Puerto host:** `15001`
-* **Healthcheck:** `curl -s http://localhost:15001/api/health`
+* **Puerto host:** `16001`
+* **Healthcheck:** `curl -s http://localhost:16001/api/health`
 * **Persistencia:** Mapea automáticamente la base de datos y uploads correspondientes.
 
 ### B) Frontend SPA (`akami-web`)
@@ -166,8 +166,8 @@ docker compose up -d
 cd ~/akami/akami-web
 docker compose up -d
 ```
-* **Puerto host:** `16001`
-* **Healthcheck:** `curl -s http://localhost:16001/`
+* **Puerto host:** `17001`
+* **Healthcheck:** `curl -s http://localhost:17001/`
 
 ---
 
@@ -179,7 +179,7 @@ Si alguna vez despliegas en una instancia EC2 completamente nueva:
 # 1. Crear directorio del proyecto
 mkdir -p ~/akami && cd ~/akami
 
-# 2. Descargar o crear el docker-compose.yml con los puertos 16001 y 15001
+# 2. Descargar o crear el docker-compose.yml con los puertos 17001 y 16001
 # (usando el contenido del Paso 2.4)
 
 # 3. Descargar el paquete de imágenes de productos desacopladas
@@ -202,9 +202,9 @@ docker exec api_akami php bin/seed.php
 
 | Componente | URL de Acceso |
 |---|---|
-| **Catálogo Público** | `http://<IP-PUBLICA-AWS>:16001/` *(o `https://akami.batdev.lat/`)* |
-| **Panel Mini CMS** | `http://<IP-PUBLICA-AWS>:16001/#admin` |
-| **Backend RESTful API** | `http://<IP-PUBLICA-AWS>:15001/api/` |
+| **Catálogo Público** | `http://<IP-PUBLICA-AWS>:17001/` *(o `https://akami.batdev.lat/`)* |
+| **Panel Mini CMS** | `http://<IP-PUBLICA-AWS>:17001/#admin` |
+| **Backend RESTful API** | `http://<IP-PUBLICA-AWS>:16001/api/` |
 
 #### Credenciales Administrativas:
 * **Usuario:** `akami`

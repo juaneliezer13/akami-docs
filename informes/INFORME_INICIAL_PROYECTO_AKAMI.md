@@ -2,7 +2,7 @@
 
 **Proyecto:** Akami K-Beauty (Vitrina Web, Catálogo Digital SPA & Mini CMS)  
 **Cliente:** Akami C.A.  
-**Estado Actual:** Producción Estable (`v1.6.0` — Frontend Puerto `16001` / Backend API Puerto `15001`)  
+**Estado Actual:** Producción Estable (`v1.6.0` — Frontend Puerto `17001` / Backend API Puerto `16001`)  
 
 ---
 
@@ -29,8 +29,8 @@ El proyecto dota a la marca **Akami K-Beauty** de una plataforma web de cosméti
 
 ## 3. 🏗️ Arquitectura Técnica de Producción
 
-* **Frontend (`akamikbeauty` — Puerto `16001`):** Vue 3 (Composition API, `<script setup>`), TypeScript, Vite, Tailwind CSS y contenedor `nginx:alpine` con bloque prioritario `^~ /uploads/` y proxy inverso hacia `/api/`.
-* **Backend (`akami-api` — Puerto `15001`):** Microservicio RESTful en PHP 8.2 (`php:8.2-cli-alpine`) con PDO SQLite en modo WAL (`database/akami.sqlite`), autenticación Bearer (`akami` / `akami2026`), auto-seeding y subida de imágenes de hasta 25 MB.
+* **Frontend (`akamikbeauty` — Puerto `17001`):** Vue 3 (Composition API, `<script setup>`), TypeScript, Vite, Tailwind CSS y contenedor `nginx:alpine` con bloque prioritario `^~ /uploads/` y proxy inverso hacia `/api/`.
+* **Backend (`akami-api` — Puerto `16001`):** Microservicio RESTful en PHP 8.2 (`php:8.2-cli-alpine`) con PDO SQLite en modo WAL (`database/akami.sqlite`), autenticación Bearer (`akami` / `akami2026`), auto-seeding y subida de imágenes de hasta 25 MB.
 * **Almacenamiento Persistente:**
   * `database/akami.sqlite`: Base de datos relacional activa con 83 productos oficiales, marcas, categorías y usuarios.
   * `uploads/products/`: Almacenamiento desacoplado de fotografías de productos con soporte Drag-and-Drop desde el Mini CMS (`#admin`).

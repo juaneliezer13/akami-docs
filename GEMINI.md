@@ -5,8 +5,8 @@ Este proyecto sigue las especificaciones detalladas en [`AGENTS.md`](./AGENTS.md
 ## Puntos Críticos a Recordar (v1.6.0+)
 
 1. **Estructura Limpia del Workspace (`akami/`):**
-   * `akamikbeauty/`: Frontend SPA en Vue 3 + TypeScript + Vite + Tailwind CSS + Nginx Alpine (Puerto `16001`).
-   * `akami-api/`: Backend RESTful en PHP 8.2 + SQLite WAL (Puerto `15001`, subida hasta `25 MB`).
+   * `akamikbeauty/`: Frontend SPA en Vue 3 + TypeScript + Vite + Tailwind CSS + Nginx Alpine (Puerto `17001`).
+   * `akami-api/`: Backend RESTful en PHP 8.2 + SQLite WAL (Puerto `16001`, subida hasta `25 MB`).
    * `akami-docs/`: Repositorio central de documentación y activos optimizados en WebP (`kebab-case`).
    * `database/`: Solo contiene `akami.sqlite`.
    * `uploads/products/`: Imágenes de productos desacopladas servidas mediante `location ^~ /uploads/` en Nginx.

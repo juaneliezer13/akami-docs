@@ -6,13 +6,13 @@ Por favor, lee y respeta íntegramente las directrices establecidas en:
 
 ## Resumen Rápido de Comandos y Arquitectura (v1.6.0+)
 
-* **Frontend (`akamikbeauty/` — Puerto `16001`):**
+* **Frontend (`akamikbeauty/` — Puerto `17001`):**
   * Desarrollo: `cd akamikbeauty && npm run dev`
   * Build de producción (genera `html/`): `cd akamikbeauty && npm run build`
   * Contenedor Docker: `cd akamikbeauty && docker compose up -d`
-* **Backend (`akami-api/` — Puerto `15001`):**
+* **Backend (`akami-api/` — Puerto `16001`):**
   * Contenedor Docker: `cd akami-api && docker compose up -d`
-  * Healthcheck: `curl -s http://localhost:15001/api/health`
+  * Healthcheck: `curl -s http://localhost:16001/api/health`
 * **Base de Datos (`database/akami.sqlite`):**
   * Base de datos SQLite en modo WAL con 83 productos oficiales, 20 marcas y 8 categorías. No modificar ni borrar `akami.sqlite`, ni añadir archivos extra en `database/`.
 * **Reglas Clave de UI y Servidor:**

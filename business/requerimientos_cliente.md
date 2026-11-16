@@ -73,7 +73,7 @@ El usuario puede explorar los **83 productos oficiales y 19 marcas** de 3 formas
 
 ## ⚡ Requerimientos No Funcionales y Arquitectura Desacoplada
 
-1. **Frontend SPA (`akamikbeauty` — Puerto `16001`):**
+1. **Frontend SPA (`akamikbeauty` — Puerto `17001`):**
    * Construido en Vue 3 + TypeScript + Vite + Tailwind CSS, servido mediante `nginx:alpine` con compresión Gzip, caché de activos y bloque prioritario `location ^~ /uploads/` para servir fotografías dinámicas sin conflictos de regex.
-2. **Backend RESTful API (`akami-api` — Puerto `15001`):**
+2. **Backend RESTful API (`akami-api` — Puerto `16001`):**
    * Microservicio en PHP 8.2 (`php:8.2-cli-alpine`) con PDO SQLite en modo WAL (`database/akami.sqlite`), auto-seeding inicial de los 83 productos oficiales y límite de carga de 25 MB.

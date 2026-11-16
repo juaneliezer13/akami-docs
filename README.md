@@ -22,7 +22,7 @@ akami-docs/
 │   └── catalogo_productos.csv                    # Exportación CSV (UTF-8 con BOM) para hojas de cálculo
 │
 ├── 🚀 deploy/                                    # Guías DevOps, Docker Compose y configuración de servidores
-│   ├── GUIA_DESPLIEGUE_AWS_DESDE_CERO.md         # Guía paso a paso para AWS EC2 (Frontend 16001 | Backend 15001)
+│   ├── GUIA_DESPLIEGUE_AWS_DESDE_CERO.md         # Guía paso a paso para AWS EC2 (Frontend 17001 | Backend 16001)
 │   ├── DEPLOY_GODADDY_DOCKER.md                  # Guía de contenedorización ligera
 │   ├── STAGING.md                                # Guía de entorno Staging
 │   ├── docker-compose.server.yml                 # Compose de referencia para servidor de producción
@@ -32,12 +32,12 @@ akami-docs/
 ├── 🏷️ releases/                                  # Historial completo de versiones y notas de lanzamiento
 │   ├── README.md                                 # Matriz centralizada de versiones (Frontend + Backend API)
 │   ├── RELEASE_NOTES_v1.1.0.md                   # Reconciliación inicial de catálogo y arquitectura modular
-│   ├── RELEASE_NOTES_API_v1.1.0.md               # Orquestación autónoma de akami-api en puerto 15001
+│   ├── RELEASE_NOTES_API_v1.1.0.md               # Orquestación autónoma de akami-api en puerto 16001
 │   ├── RELEASE_NOTES_v1.2.0.md                   # Optimización de banners y experiencia móvil
 │   ├── RELEASE_NOTES_v1.2.2.md                   # Sincronización de inventario y precios oficiales
 │   ├── RELEASE_NOTES_v1.2.3.md                   # Ajustes de catálogo y normalización de activos
 │   ├── RELEASE_NOTES_v1.3.0.md                   # Mini CMS integrado, Backend PHP 8.2 + SQLite y /uploads/
-│   ├── RELEASE_NOTES_v1.4.0.md                   # Desacoplamiento de infraestructura (Puertos 16001 y 15001)
+│   ├── RELEASE_NOTES_v1.4.0.md                   # Desacoplamiento de infraestructura (Puertos 17001 y 16001)
 │   ├── RELEASE_NOTES_v1.5.0.md                   # Renovación completa de banners WebP por categoría y piel
 │   ├── RELEASE_NOTES_v1.5.1.md                   # Nuevos copys editoriales y logotipo blanco en banners
 │   ├── RELEASE_NOTES_v1.5.2.md                   # Actualización de CTA principal a "Comprar"
@@ -67,8 +67,8 @@ El ecosistema completo en el entorno de trabajo (`akami/`) opera bajo una arquit
 
 ```text
 akami/
-├── 💻 akamikbeauty/          # Frontend SPA (Vue 3 + TS + Vite + Tailwind + Nginx Alpine) -> Puerto 16001
-├── 🛠️ akami-api/             # Backend RESTful API (PHP 8.2 + PDO SQLite WAL)            -> Puerto 15001
+├── 💻 akamikbeauty/          # Frontend SPA (Vue 3 + TS + Vite + Tailwind + Nginx Alpine) -> Puerto 17001
+├── 🛠️ akami-api/             # Backend RESTful API (PHP 8.2 + PDO SQLite WAL)            -> Puerto 16001
 ├── 📚 akami-docs/            # Repositorio central de documentación y activos (este repo)
 ├── 🗄️ database/              # Persistencia SQLite (contiene únicamente akami.sqlite)
 └── 🖼️ uploads/products/      # Almacenamiento persistente de imágenes subidas desde el Mini CMS

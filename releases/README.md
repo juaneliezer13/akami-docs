@@ -8,7 +8,8 @@ Este directorio centraliza todas las notas de versión (*Release Notes*) y el co
 
 | Versión | Componente | Fecha / Hito Principal | Imagen Docker / Tag | Archivo de Notas |
 | :--- | :--- | :--- | :--- | :--- |
-| **`v1.6.0`** *(Actual)* | Ecosistema Completo | Secciones *Quiénes Somos*, *Valor de Marca*, *Contacto*, videos `faststart` y subida Drag & Drop (25 MB) | `juaneliezer13/akamikbeauty:v1.6.0` / `latest`<br>`juaneliezer13/akami-api:latest` | [`RELEASE_NOTES_v1.6.0.md`](./RELEASE_NOTES_v1.6.0.md) |
+| **`v1.6.1`** *(Actual)* | Infraestructura / Ecosistema | Reasignación de puertos de contenedores (`16001` Backend API / `17001` Frontend Web SPA) | `juaneliezer13/akamikbeauty:latest`<br>`juaneliezer13/akami-api:latest` | [`RELEASE_NOTES_v1.6.1.md`](./RELEASE_NOTES_v1.6.1.md) |
+| **`v1.6.0`** | Ecosistema Completo | Secciones *Quiénes Somos*, *Valor de Marca*, *Contacto*, videos `faststart` y subida Drag & Drop (25 MB) | `juaneliezer13/akamikbeauty:v1.6.0` / `latest`<br>`juaneliezer13/akami-api:latest` | [`RELEASE_NOTES_v1.6.0.md`](./RELEASE_NOTES_v1.6.0.md) |
 | **`v1.5.2`** | Frontend Web SPA | Unificación del llamado a la acción (CTA) principal a *"Comprar"* | `juaneliezer13/akamikbeauty:v1.5.2` | [`RELEASE_NOTES_v1.5.2.md`](./RELEASE_NOTES_v1.5.2.md) |
 | **`v1.5.1`** | Frontend Web SPA | Nuevos copys editoriales y logotipo blanco de marca en banners | `juaneliezer13/akamikbeauty:v1.5.1` | [`RELEASE_NOTES_v1.5.1.md`](./RELEASE_NOTES_v1.5.1.md) |
 | **`v1.5.0`** | Frontend Web SPA | Renovación integral de banners WebP por categoría y tipo de piel | `juaneliezer13/akamikbeauty:v1.5.0` | [`RELEASE_NOTES_v1.5.0.md`](./RELEASE_NOTES_v1.5.0.md) |

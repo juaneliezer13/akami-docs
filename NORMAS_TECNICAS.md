@@ -10,14 +10,14 @@ El workspace de **Akami K-Beauty** está compuesto por tres repositorios princip
 
 | Componente | Ruta en Workspace | Tecnología / Propósito | Puerto Host |
 | :--- | :--- | :--- | :---: |
-| **Frontend Web SPA** | `akamikbeauty/` | Vue 3 + TypeScript + Vite + Tailwind CSS + Nginx Alpine (`juaneliezer13/akamikbeauty:latest`) | `16001` |
-| **Backend REST API** | `akami-api/` | PHP 8.2 CLI Alpine + PDO SQLite WAL (`juaneliezer13/akami-api:latest`) | `15001` |
+| **Frontend Web SPA** | `akamikbeauty/` | Vue 3 + TypeScript + Vite + Tailwind CSS + Nginx Alpine (`juaneliezer13/akamikbeauty:latest`) | `17001` |
+| **Backend REST API** | `akami-api/` | PHP 8.2 CLI Alpine + PDO SQLite WAL (`juaneliezer13/akami-api:latest`) | `16001` |
 | **Documentación y Activos** | `akami-docs/` | Documentación técnica, reglas de negocio, releases y activos optimizados | N/A |
 | **Base de Datos Activa** | `database/` | Contiene **únicamente** `akami.sqlite` (83 productos, 20 marcas, 8 categorías) | Volumen Docker |
 | **Medios Desacoplados** | `uploads/products/` | Fotografías de productos servidas por Nginx (`^~ /uploads/`) y gestionadas por el CMS | Volumen Docker |
 
 ### Reglas de Infraestructura y Contenedores
-1. **Puertos Estándar:** Frontend en **`16001`** (`FRONT_PORT`) y Backend en **`15001`** (`BACK_PORT`), conectados mediante la red bridge `akami_network`.
+1. **Puertos Estándar:** Frontend en **`17001`** (`FRONT_PORT`) y Backend en **`16001`** (`BACK_PORT`), conectados mediante la red bridge `akami_network`.
 2. **Servido de Imágenes en Nginx (`akamikbeauty/nginx.conf`):** El bloque `location ^~ /uploads/` utiliza el modificador `^~` para tener prioridad absoluta sobre la expresión regular de archivos estáticos (`.jpg`, `.webp`, `.png`), garantizando que las imágenes subidas al volumen `/usr/share/nginx/uploads/` nunca devuelvan error 404.
 3. **Límite de Subida en PHP (`akami-api/Dockerfile`):** Configurado en `25M` (`upload_max_filesize = 25M` y `post_max_size = 25M`) para soportar fotografías de estudio en alta resolución subidas mediante clic o Drag-and-Drop en el Mini CMS (`#admin`).
 4. **Limpieza de `database/`:** En la carpeta `/database` solo debe residir el archivo `akami.sqlite` (y sus archivos temporales de transacciones `-wal` / `-shm` generados por SQLite). Las exportaciones documentales (`catalogo_productos.json` y `catalogo_productos.csv`) viven en `akami-docs/business/`, y la semilla del backend vive en `akami-api/src/data/productos.json`.

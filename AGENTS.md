@@ -8,7 +8,7 @@ Este archivo define el contexto arquitectónico, las reglas de negocio y las res
 
 El workspace `akami/` se divide en módulos desacoplados:
 
-1. **`akamikbeauty/` (Frontend Web SPA — Puerto `16001`):**
+1. **`akamikbeauty/` (Frontend Web SPA — Puerto `17001`):**
    * **Stack:** Vue 3 (`<script setup>`, Composition API), TypeScript, Vite, Tailwind CSS, Lucide Icons, servido en producción por `nginx:alpine`.
    * **Vistas y Secciones:**
      * **Vitrina de Catálogo:** Filtros reactivos por Categoría (8), Tipo de Piel (5), Marca (Drawer lateral con 19/20 marcas) y buscador en tiempo real.
@@ -17,7 +17,7 @@ El workspace `akami/` se divide en módulos desacoplados:
      * **Mini CMS Administrativo (`src/components/admin/`):** Ruta `#admin`. Login con token Bearer (`akami` / `akami2026`). Gestión CRUD de productos, marcas y categorías, con carga de imágenes por clic o **Drag-and-Drop** y fallback automático de imágenes en tarjetas y modal.
    * **Conversión:** Todos los botones de acción de producto utilizan el texto **"Comprar"** (en `ProductCard.vue`) y **"Comprar por WhatsApp"** (en `ProductDetailModal.vue`).
 
-2. **`akami-api/` (Backend RESTful API — Puerto `15001`):**
+2. **`akami-api/` (Backend RESTful API — Puerto `16001`):**
    * **Stack:** PHP 8.2 (`php:8.2-cli-alpine`) + PDO SQLite en modo WAL.
    * **Configuración Clave:**
      * Límite de carga en `php.ini` ampliado a **`25M`** (`upload_max_filesize = 25M`, `post_max_size = 25M`) en `Dockerfile` para permitir fotografías de alta resolución.
